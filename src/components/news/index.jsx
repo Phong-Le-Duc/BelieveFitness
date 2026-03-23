@@ -4,7 +4,7 @@ import Image from "next/image";
 export default async function News() {
     const news = await getAllNews();
 
-    console.log("News:", news);
+    // console.log("News:", news);
 
     if (!news || !Array.isArray(news) || news.length === 0) {
         return (
