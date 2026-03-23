@@ -25,7 +25,7 @@ export async function getSingleUser() {
     const contentType = res.headers.get("content-type") || "";
     if (contentType.includes("application/json")) {
         const data = await res.json();
-        console.log("❤️getSingleUser data:", data);
+        console.log("❤️getSingleUser :", data);
 
         if (Array.isArray(data.classes)) {
             data.classes.forEach((classObj, idx) => {
