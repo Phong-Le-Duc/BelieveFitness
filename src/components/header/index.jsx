@@ -20,14 +20,14 @@ export default function Header({ isLoggedIn }) {
     const isHome = pathname === "/";
     const isDetailPage = pathname.startsWith("/popular-classes/") && pathname.split("/").length === 3;
     const headerRouteLocation = isHome || isDetailPage
-        ? "fixed top-0 left-0 right-0 z-50"
+        ? "fixed top-0 left-1/2 -translate-x-1/2 z-50"
         : "relative";
 
 
     const isWhiteArrow = pathname === "/" || pathname.startsWith("/popular-classes/") && pathname.split("/").length === 3;
 
     return (
-        <header className={`px-8 flex gap-4 items-center justify-between bg-transparent w-full p-4 my-2 ${headerRouteLocation}`}>
+        <header className={`px-8 flex gap-4 items-center justify-between bg-transparent w-full max-w-[445px] mx-auto py-4 ${headerRouteLocation}`}>
             <div className="flex justify-around">
                 <button
                     onClick={() => router.back()}

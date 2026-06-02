@@ -18,16 +18,18 @@
 
 .overlay {
     position: fixed;
-    inset: 0;
-    width: 100vw;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 110%;
+    max-width: 450px;
     height: 100vh;
-    background: #fff;
+    background: #e4e3e3;
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     padding-top: 18vh;
-
 }
 
 .nav {
