@@ -41,10 +41,10 @@ export default function TestimonialCarousel({ testimonials }) {
                 </div>
 
                 <div className="relative z-10 flex gap-2">
-                    <button onClick={prev} className="p-2 hover:bg-white rounded">
+                    <button onClick={prev} className="p-2 hover:bg-white/20 rounded-full">
                         <IoChevronBackCircleOutline size={34} color="white" />
                     </button>
-                    <button onClick={next} className="p-2 hover:bg-white rounded">
+                    <button onClick={next} className="p-2 hover:bg-white/20 rounded-full">
                         <IoChevronForwardCircleOutline size={34} color="white" />
                     </button>
                 </div>
