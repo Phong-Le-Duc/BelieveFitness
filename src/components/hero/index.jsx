@@ -13,8 +13,8 @@ export default function Hero() {
 
     return (
         <div className="relative w-full h-[40vh]">
-            <div className="absolute inset-0 bg-black/50"></div>
-            <div className="absolute inset-0 -z-10">
+            <div className="absolute inset-0 z-10 bg-black/50"></div>
+            <div className="absolute inset-0 z-0">
                 <Image
                     src="/assets/welcome.jpg"
                     alt="Hero Image"

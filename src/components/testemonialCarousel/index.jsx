@@ -22,7 +22,7 @@ export default function TestimonialCarousel({ testimonials }) {
     return (
         <section className="w-full mt-8">
             <div className="relative p-6 flex flex-col items-center">
-                <div className="absolute inset-0 -z-10">
+                <div className="absolute inset-0 z-0">
                     <Image
                         src="/assets/testimonial_image.png"
                         alt="Testimonial background"
