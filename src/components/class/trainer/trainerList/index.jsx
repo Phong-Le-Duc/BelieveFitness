@@ -14,7 +14,7 @@ export default function TrainerList({ trainers }) {
                                 alt={trainer.trainerName}
                                 width={58}
                                 height={58}
-                                unoptimized
+                                quality={60}
                                 className="object-cover rounded mr-4"
                                 style={{ aspectRatio: '1 / 1', width: '58px', height: '58px', minWidth: '58px', minHeight: '58px', maxWidth: '58px', maxHeight: '58px' }}
                             />

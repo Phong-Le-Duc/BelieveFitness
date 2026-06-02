@@ -27,7 +27,8 @@ export default async function News() {
                                 src={resolveAssetUrl(item.asset.url)}
                                 alt={item.title}
                                 fill
-                                unoptimized
+                                quality={65}
+                                sizes="100vw"
                                 className="object-cover rounded"
                             />
                         </div>

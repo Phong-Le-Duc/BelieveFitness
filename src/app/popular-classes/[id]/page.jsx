@@ -51,7 +51,8 @@ export default async function Page({ params }) {
                     alt={classItem.className}
                     width={800}
                     height={600}
-                    unoptimized
+                    quality={65}
+                    sizes="100vw"
                     className="w-full h-80 object-cover brightness-85"
                 />
                 <div
@@ -74,7 +75,8 @@ export default async function Page({ params }) {
                                 src={resolveAssetUrl(trainer.asset.url)}
                                 alt={trainer.trainerName}
                                 fill
-                                unoptimized
+                                quality={60}
+                                sizes="88px"
                                 className="object-cover h-auto w-auto"
                             />
                         </div>

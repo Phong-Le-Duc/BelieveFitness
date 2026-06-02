@@ -22,8 +22,9 @@ export default async function Page({ params }) {
                     <Image src={resolveAssetUrl(user.profilePicture) || '/assets/profile_icon.png'}
                         alt={`${user.userFirstName} ${user.userLastName}`}
                         width={30} height={30}
+                        quality={60}
                         className="w-8 h-8 object-cover "
-                        unoptimized />
+                    />
                 </figure>
                 <div className="ml-4 flex flex-col justify-center">
                     <p className="text-lg">{user.userFirstName} {user.userLastName}</p>

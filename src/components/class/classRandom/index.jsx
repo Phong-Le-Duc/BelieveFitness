@@ -17,7 +17,8 @@ export default function ClassRandom({ classes = [] }) {
                     alt={randomClass.className}
                     width={800}
                     height={600}
-                    unoptimized
+                    quality={65}
+                    sizes="100vw"
                     className="w-full h-70 object-cover rounded-4xl"
                 />
                 <div

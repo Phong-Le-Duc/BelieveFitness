@@ -12,9 +12,9 @@ export default function ClassCard({ classId, imageUrl, altText }) {
                 <Image
                     src={resolveAssetUrl(imageUrl) || "/assets/welcome.jpg"}
                     alt={altText}
-                    unoptimized
                     width={500}
                     height={400}
+                    quality={65}
                     className="w-full h-48 object-cover rounded-4xl rounded-br-none"
                 />
             </Link>
