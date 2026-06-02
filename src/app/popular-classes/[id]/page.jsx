@@ -56,7 +56,7 @@ export default async function Page({ params }) {
                     className="w-full h-80 object-cover brightness-85"
                 />
                 <div
-                    className="absolute bottom-10 left-4 flex flex-col gap-8"
+                    className="absolute bottom-6 left-4 flex flex-col gap-4"
                     style={{ color: "var(--color-secondary)" }}
                 >
                     <p className="heroText">{classItem.className}</p>
