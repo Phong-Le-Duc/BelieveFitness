@@ -7,14 +7,16 @@ export default function SplashLayout({ children, fontClass }) {
     const [splashDone, setSplashDone] = useState(false);
 
     return (
-        <div className={fontClass}>
-            <SplashScreen onFinish={() => setSplashDone(true)} />
-            {splashDone && (
-                <>
-                    <Header />
-                    {children}
-                </>
-            )}
+        <div className="site-shell">
+            <div className={`${fontClass} app-shell`}>
+                <SplashScreen onFinish={() => setSplashDone(true)} />
+                {splashDone && (
+                    <>
+                        <Header />
+                        {children}
+                    </>
+                )}
+            </div>
         </div>
     );
 }
