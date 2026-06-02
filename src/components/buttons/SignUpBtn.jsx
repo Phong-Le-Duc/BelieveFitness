@@ -1,43 +1,56 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signUpForClass, leaveClass } from "@/app/popular-classes/[id]/userAction";
 
 export default function SignUpBtn({ classId, isEnrolled, joinedCount, maxParticipants }) {
-    const [isPending, startTransition] = useTransition();
+    const [pendingAction, setPendingAction] = useState(null);
     const [error, setError] = useState(null);
     const [enrolled, setEnrolled] = useState(isEnrolled);
     const router = useRouter();
 
     const isFull = joinedCount >= maxParticipants;
+    const isPending = pendingAction !== null;
 
     const handleSignUp = async () => {
         setError(null);
-        startTransition(async () => {
-            try {
-                await signUpForClass(classId);
-                setEnrolled(true);
-                router.refresh();
-            } catch (err) {
-                setError(err.message || "Something went wrong");
-            }
-        });
+        setPendingAction("signup");
+
+        try {
+            await signUpForClass(classId);
+            setEnrolled(true);
+            router.refresh();
+        } catch (err) {
+            setError(err.message || "Something went wrong");
+        } finally {
+            setPendingAction(null);
+        }
     };
 
     const handleLeave = async () => {
         if (!window.confirm("Leave class?")) return;
         setError(null);
-        startTransition(async () => {
-            try {
-                await leaveClass(classId);
-                setEnrolled(false);
-                router.refresh();
-            } catch (err) {
-                setError(err.message || "Something went wrong");
-            }
-        });
+        setPendingAction("leave");
+
+        try {
+            await leaveClass(classId);
+            setEnrolled(false);
+            router.refresh();
+        } catch (err) {
+            setError(err.message || "Something went wrong");
+        } finally {
+            setPendingAction(null);
+        }
     };
+
+    const buttonLabel = pendingAction === "signup"
+        ? "Signing up..."
+        : pendingAction === "leave"
+            ? "Leaving..."
+            : enrolled
+                ? "Leave Class"
+                : "SIGN UP";
 
     return (
         <div>
@@ -51,7 +64,7 @@ export default function SignUpBtn({ classId, isEnrolled, joinedCount, maxPartici
                             onClick={handleLeave}
                             disabled={isPending}
                         >
-                            {isPending ? "Leaving..." : "Leave Class"}
+                            {buttonLabel}
                         </button>
                     )}
                 </div>
@@ -62,7 +75,7 @@ export default function SignUpBtn({ classId, isEnrolled, joinedCount, maxPartici
                     onClick={handleLeave}
                     disabled={isPending}
                 >
-                    {isPending ? "Leaving..." : "Leave Class"}
+                    {buttonLabel}
                 </button>
             ) : (
                 <button
@@ -71,7 +84,7 @@ export default function SignUpBtn({ classId, isEnrolled, joinedCount, maxPartici
                     onClick={handleSignUp}
                     disabled={isPending}
                 >
-                    {isPending ? "Signing up..." : "SIGN UP"}
+                    {buttonLabel}
                 </button>
             )}
             {error && <p style={{ color: "red" }}>{error}</p>}
