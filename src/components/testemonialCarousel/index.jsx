@@ -31,7 +31,7 @@ export default function TestimonialCarousel({ testimonials }) {
                     />
                 </div>
 
-                <h2 className="text-center mb-2 text-white font-bold">A word from <br /> other believers</h2>
+                <h2 className="relative z-10 text-center mb-2 text-white font-bold">A word from <br /> other believers</h2>
 
                 <div className="relative z-10 text-white" key={current}>
                     <div className="p-4 text-center rounded fade h-48 flex flex-col items-center justify-center">
@@ -40,7 +40,7 @@ export default function TestimonialCarousel({ testimonials }) {
                     </div>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="relative z-10 flex gap-2">
                     <button onClick={prev} className="p-2 hover:bg-white rounded">
                         <IoChevronBackCircleOutline size={34} color="white" />
                     </button>
