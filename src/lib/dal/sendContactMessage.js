@@ -1,8 +1,9 @@
 "use server";
+import { API_BASE_URL } from "./apiBaseUrl";
 
 export async function sendContactMessage(data) {
     try {
-        const response = await fetch("http://localhost:4000/api/v1/messages", {
+        const response = await fetch(`${API_BASE_URL}/api/v1/messages`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

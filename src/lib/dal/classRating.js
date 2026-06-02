@@ -1,9 +1,10 @@
 "use server";
+import { API_BASE_URL } from "./apiBaseUrl";
 
 
 export async function getRatingByClassId(classId) {
     try {
-        const res = await fetch(`http://localhost:4000/api/v1/classes/${classId}/ratings`, {
+        const res = await fetch(`${API_BASE_URL}/api/v1/classes/${classId}/ratings`, {
             cache: "no-store",
         });
 

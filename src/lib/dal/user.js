@@ -1,5 +1,6 @@
 "use server";
 import { cookies } from "next/headers";
+import { API_BASE_URL } from "./apiBaseUrl";
 
 export async function getSingleUser() {
     const cookieStore = await cookies();
@@ -10,7 +11,7 @@ export async function getSingleUser() {
     const token = cookieStore.get("token").value;
 
 
-    const res = await fetch(`http://localhost:4000/api/v1/users/${userId}`, {
+    const res = await fetch(`${API_BASE_URL}/api/v1/users/${userId}`, {
         headers: {
             Authorization: `Bearer ${token}`
         },
@@ -46,7 +47,7 @@ export async function addUserToClass(userId, classId, token) {
     if (!token) throw new Error("Missing token");
 
     const res = await fetch(
-        `http://localhost:4000/api/v1/users/${userId}/classes/${classId}`,
+        `${API_BASE_URL}/api/v1/users/${userId}/classes/${classId}`,
         {
             method: "POST",
             headers: {
@@ -70,7 +71,7 @@ export async function deleteUserFromClass(userId, classId, token) {
     if (!token) throw new Error("Missing token");
 
     const res = await fetch(
-        `http://localhost:4000/api/v1/users/${userId}/classes/${classId}`,
+        `${API_BASE_URL}/api/v1/users/${userId}/classes/${classId}`,
         {
             method: "DELETE",
             headers: {

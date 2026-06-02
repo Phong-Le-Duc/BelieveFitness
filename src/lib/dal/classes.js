@@ -2,16 +2,12 @@
 import { cookies } from "next/headers";
 import { z } from "zod/v4";
 import { createClassSchema } from "@/lib/schemas";
-
-const API_BASE_URL =
-    process.env.API_BASE_URL ||
-    process.env.NEXT_PUBLIC_API_URL ||
-    "http://localhost:4000";
+import { API_BASE_URL } from "./apiBaseUrl";
 
 
 export async function getAllClasses() {
     try {
-        const res = await fetch("http://localhost:4000/api/v1/classes");
+        const res = await fetch(`${API_BASE_URL}/api/v1/classes`);
         if (!res.ok) {
             throw new Error("Something went wrong");
         }
@@ -32,7 +28,7 @@ export async function getAllClasses() {
 
 export async function getSingleClassById(id) {
     try {
-        const res = await fetch(`http://localhost:4000/api/v1/classes/${id}`, {
+        const res = await fetch(`${API_BASE_URL}/api/v1/classes/${id}`, {
             cache: "no-store",
         });
 

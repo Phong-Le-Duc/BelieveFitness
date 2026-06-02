@@ -1,10 +1,11 @@
 "use server";
+import { API_BASE_URL } from "./apiBaseUrl";
 
 
 export async function searchClasses(query) {
     try {
         const res = await fetch(
-            `http://localhost:4000/api/v1/classes?query=${query}`
+            `${API_BASE_URL}/api/v1/classes?query=${query}`
         );
 
         if (!res.ok) {

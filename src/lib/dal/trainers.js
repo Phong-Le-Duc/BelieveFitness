@@ -1,8 +1,9 @@
 "use server";
+import { API_BASE_URL } from "./apiBaseUrl";
 
 export async function getAllTrainers() {
     try {
-        const res = await fetch("http://localhost:4000/api/v1/trainers");
+        const res = await fetch(`${API_BASE_URL}/api/v1/trainers`);
         if (!res.ok) throw new Error("Something went wrong");
 
         const contentType = res.headers.get("content-type");
@@ -18,7 +19,7 @@ export async function getAllTrainers() {
 }
 
 export async function getTrainerById(id) {
-    const res = await fetch(`http://localhost:4000/api/v1/trainers/${id}`);
+    const res = await fetch(`${API_BASE_URL}/api/v1/trainers/${id}`);
     if (!res.ok) throw new Error("Something went wrong");
     const contentType = res.headers.get("content-type");
     if (contentType && contentType.includes("application/json")) {

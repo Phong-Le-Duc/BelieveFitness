@@ -1,8 +1,9 @@
 "use server";
+import { API_BASE_URL } from "./apiBaseUrl";
 
 export async function getAllTestimonials() {
     try {
-        const res = await fetch("http://localhost:4000/api/v1/testimonials");
+        const res = await fetch(`${API_BASE_URL}/api/v1/testimonials`);
         if (!res.ok) {
             throw new Error("Something went wrong");
         }
