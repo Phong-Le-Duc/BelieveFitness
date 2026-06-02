@@ -1,5 +1,12 @@
 "use server";
 import { cookies } from "next/headers";
+import { z } from "zod/v4";
+import { createClassSchema } from "@/lib/schemas";
+
+const API_BASE_URL =
+    process.env.API_BASE_URL ||
+    process.env.NEXT_PUBLIC_API_URL ||
+    "http://localhost:4000";
 
 
 export async function getAllClasses() {
@@ -47,101 +54,88 @@ export async function getSingleClassById(id) {
 
 // create, update, delete class virker ikke endnu så er ikke implementeret i opgaven.
 
-// export async function createClass(prevState, formData) {
+export async function createClass(prevState, formData) {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+    const file = formData.get("file");
 
-//     const cookieStore = await cookies();
-//     const token = cookieStore.get("token").value;
+    if (!file || (typeof file === "object" && file.size === 0)) {
+        return {
+            ...prevState,
+            assetId: { errors: ["Image is required"] },
+        };
+    }
 
-//     console.log("createClass called");
-//     const formEntries = Object.fromEntries(formData);
-//     console.log("FormData entries:", formEntries);
+    let assetData;
+    try {
+        const assetResponse = await fetch(`${API_BASE_URL}/api/v1/assets`, {
+            method: "POST",
+            headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+            body: formData,
+        });
 
-   
-//     const requiredFields = [
-//         "className",
-//         "classDescription",
-//         "classDay",
-//         "classTime",
-//         "maxParticipants",
-//         "trainerId"
-//     ];
-//     const missingFields = requiredFields.filter((field) => !formEntries[field]);
-//     if (missingFields.length > 0) {
-//         const msg = `Følgende felter mangler: ${missingFields.join(", ")}`;
-//         console.error(msg);
-//         return { ok: false, error: msg };
-//     }
+        assetData = await assetResponse.json();
 
-    
-//     const assetResponse = await fetch("http://localhost:4000/api/v1/assets", {
-//         method: "POST",
-//         headers: {
-//             Authorization: `Bearer ${token}`,
-//         },
-//         body: formData
-//     });
-//     const assetData = await assetResponse.json();
+        if (!assetResponse.ok || !assetData?.id) {
+            return {
+                ...prevState,
+                assetId: { errors: ["Failed to upload image"] },
+            };
+        }
+    } catch (error) {
+        console.error("createClass asset upload error:", error);
+        return {
+            ...prevState,
+            assetId: { errors: ["Failed to upload image"] },
+        };
+    }
 
-//     if (!assetResponse.ok || !assetData.id) {
-//         console.error("Failed to create asset:", assetData);
-//         return { ok: false, error: "Failed to create asset", details: assetData };
-//     }
+    const payload = {
+        className: formData.get("className"),
+        classDescription: formData.get("classDescription"),
+        classDay: formData.get("classDay"),
+        classTime: formData.get("classTime"),
+        trainerId: formData.get("trainerId"),
+        assetId: assetData.id,
+        maxParticipants: formData.get("maxParticipants"),
+    };
 
-    
-//     const classFormData = new FormData();
-//     for (const [key, value] of formData.entries()) {
-//         if (key !== "file") {
-//             classFormData.append(key, value);
-//         }
-//     }
-//     classFormData.append("assetId", assetData.id);
+    const validation = createClassSchema.safeParse(payload);
+    if (!validation.success) {
+        return z.treeifyError(validation.error).properties;
+    }
 
-  
-//     const classFormEntries = {};
-//     for (const [key, value] of classFormData.entries()) {
-//         classFormEntries[key] = value;
-//     }
-//     console.log("classFormData to be sent:", classFormEntries);
+    const classFormData = new FormData();
+    classFormData.append("className", validation.data.className);
+    classFormData.append("classDescription", validation.data.classDescription);
+    classFormData.append("classDay", validation.data.classDay);
+    classFormData.append("classTime", validation.data.classTime);
+    classFormData.append("trainerId", String(validation.data.trainerId));
+    classFormData.append("assetId", String(validation.data.assetId));
+    classFormData.append("maxParticipants", String(validation.data.maxParticipants));
 
-  
-//     const res = await fetch("http://localhost:4000/api/v1/classes", {
-//         method: "POST",
-//         headers: {
-//             Authorization: `Bearer ${token}`,
-//         },
-//         body: classFormData
-//     });
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/v1/classes`, {
+            method: "POST",
+            headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+            body: classFormData,
+        });
 
-//     let resData;
-//     let rawText;
-//     try {
-//         rawText = await res.text();
-//         try {
-//             resData = JSON.parse(rawText);
-//         } catch (e) {
-           
-//             console.error("[createClass] No JSON response", {
-//                 status: res.status,
-//                 statusText: res.statusText,
-//                 rawText
-//             });
-//             resData = { error: "No JSON response", status: res.status, statusText: res.statusText, rawText };
-//         }
-//     } catch (e) {
-     
-//         console.error("[createClass] Response body could not be read", {
-//             status: res.status,
-//             statusText: res.statusText,
-//             error: e
-//         });
-//         resData = { error: "Response body could not be read", status: res.status, statusText: res.statusText };
-//     }
+        if (!res.ok) {
+            return {
+                ...prevState,
+                className: { errors: ["Failed to create class"] },
+            };
+        }
 
-//     if (!res.ok) {
-//         console.error("Failed to create class:", resData);
-//         return { ok: false, error: "Failed to create class", details: resData };
-//     }
-
-//     console.log("Class created successfully:", resData);
-//     return { ok: true, data: resData };
-// }
+        return {
+            success: true,
+        };
+    } catch (error) {
+        console.error("createClass error:", error);
+        return {
+            ...prevState,
+            className: { errors: ["Failed to create class"] },
+        };
+    }
+}
