@@ -8,6 +8,7 @@ import ClassRating from "@/components/class/classRating";
 import SignUpBtn from "@/components/buttons/SignUpBtn";
 import { getSingleUser } from "@/lib/dal/user";
 import { cookies } from "next/headers";
+import { resolveAssetUrl } from "@/lib/resolveAssetUrl";
 
 export default async function Page({ params }) {
     const { id } = await params;
@@ -46,7 +47,7 @@ export default async function Page({ params }) {
         <main className=" flex flex-col gap-4">
             <div className="relative">
                 <Image
-                    src={classItem.asset.url}
+                    src={resolveAssetUrl(classItem.asset.url)}
                     alt={classItem.className}
                     width={800}
                     height={600}
@@ -70,7 +71,7 @@ export default async function Page({ params }) {
                     <div className="flex items-center gap-3">
                         <div className="relative w-22 h-22 overflow-hidden rounded-md shrink-0">
                             <Image
-                                src={trainer.asset.url}
+                                src={resolveAssetUrl(trainer.asset.url)}
                                 alt={trainer.trainerName}
                                 fill
                                 unoptimized

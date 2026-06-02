@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { resolveAssetUrl } from "@/lib/resolveAssetUrl";
 
 export default function ClassCard({ classId, imageUrl, altText }) {
     return (
@@ -9,7 +10,7 @@ export default function ClassCard({ classId, imageUrl, altText }) {
                 aria-label={altText}
             >
                 <Image
-                    src={imageUrl ? imageUrl : "/assets/welcome.jpg"}
+                    src={resolveAssetUrl(imageUrl) || "/assets/welcome.jpg"}
                     alt={altText}
                     unoptimized
                     width={500}

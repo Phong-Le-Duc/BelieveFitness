@@ -7,6 +7,7 @@ import { getSingleClassById } from "@/lib/dal/classes";
 import ParticipantsBtn from "@/components/buttons/participantsBtn";
 // import CreateClassBtn from "@/components/buttons/CreateClassBtn";
 import SignUpBtn from "@/components/buttons/SignUpBtn";
+import { resolveAssetUrl } from "@/lib/resolveAssetUrl";
 
 export default async function Page() {
     const cookieStore = await cookies();
@@ -36,7 +37,7 @@ export default async function Page() {
         <main className="wrapper flex flex-col gap-4">
             <div className="flex">
                 <figure className="p-4 rounded-full" style={{ backgroundColor: "var(--background-secondary)" }}>
-                    <Image src={user.profilePicture || '/assets/profile_icon.png'}
+                    <Image src={resolveAssetUrl(user.profilePicture) || '/assets/profile_icon.png'}
                         alt={`${user.userFirstName} ${user.userLastName}`}
                         width={30} height={30}
                         className="w-8 h-8 object-cover "
@@ -78,7 +79,7 @@ export default async function Page() {
         <main className="p-4 flex flex-col gap-4">
             <div className="flex">
                 <figure className="p-4 rounded-full" style={{ backgroundColor: "var(--background-secondary)" }}>
-                    <Image src={user.profilePicture || '/assets/profile_icon.png'}
+                    <Image src={resolveAssetUrl(user.profilePicture) || '/assets/profile_icon.png'}
                         alt={`${user.userFirstName} ${user.userLastName}`}
                         width={30} height={30}
                         className="w-8 h-8 object-cover "

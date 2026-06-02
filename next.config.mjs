@@ -3,9 +3,19 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: 'https',
+        hostname: 'believefitness-api.onrender.com',
+        pathname: '/file-bucket/**',
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
         port: '4000',
+        pathname: '/file-bucket/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'localhost',
         pathname: '/file-bucket/**',
       },
     ],

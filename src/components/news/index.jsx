@@ -1,5 +1,6 @@
 import { getAllNews } from "@/lib/dal/news";
 import Image from "next/image";
+import { resolveAssetUrl } from "@/lib/resolveAssetUrl";
 
 export default async function News() {
     const news = await getAllNews();
@@ -23,7 +24,7 @@ export default async function News() {
                     {item.asset && (
                         <div className="relative w-full h-48">
                             <Image
-                                src={item.asset.url}
+                                src={resolveAssetUrl(item.asset.url)}
                                 alt={item.title}
                                 fill
                                 unoptimized
