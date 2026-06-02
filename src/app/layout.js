@@ -28,10 +28,12 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body>
-        <SplashLayout fontClass={fontClass}>
-          {children}
-        </SplashLayout>
+      <body style={{ margin: 0, background: "#1f1f1f" }}>
+        <div style={{ maxWidth: "430px", width: "100%", minHeight: "100vh", margin: "0 auto", background: "var(--background-primary)" }}>
+          <SplashLayout fontClass={fontClass}>
+            {children}
+          </SplashLayout>
+        </div>
       </body>
     </html>
   );
