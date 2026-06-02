@@ -29,33 +29,6 @@ body {
   background: var(--background-primary);
   color: var(--text-primary);
   font-family: var(--font-poppins);
-  margin: 0;
-}
-
-.site-shell {
-  min-height: 100vh;
-  background: #1f1f1f;
-}
-
-.app-shell {
-  width: 100%;
-  max-width: 430px;
-  min-height: 100vh;
-  margin: 0 auto;
-  background: var(--background-primary);
-  overflow-x: hidden;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 20px 60px rgba(0, 0, 0, 0.35);
-}
-
-@media (min-width: 768px) {
-  .site-shell {
-    padding: 24px 0;
-  }
-
-  .app-shell {
-    min-height: calc(100vh - 48px);
-    border-radius: 28px;
-  }
 }
 
 .wrapper {
