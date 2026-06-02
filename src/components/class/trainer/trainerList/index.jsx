@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { resolveAssetUrl } from "@/lib/resolveAssetUrl";
 
 export default function TrainerList({ trainers }) {
     return (
@@ -9,7 +10,7 @@ export default function TrainerList({ trainers }) {
                     {trainers.map(trainer => (
                         <div key={trainer.id} className="flex items-center min-w-fit  pb-4 last:border-b-0">
                             <Image
-                                src={trainer.asset?.url}
+                                src={resolveAssetUrl(trainer.asset?.url)}
                                 alt={trainer.trainerName}
                                 width={58}
                                 height={58}
