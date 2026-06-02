@@ -54,10 +54,10 @@ export default function LoginForm() {
                 {state.errors?.form && <p style={{ color: "red" }}>{state.errors.form}</p>}
                 <button type="submit" disabled={isPending} className="bg-blue-300 p-2 w-full mx-auto rounded-full disabled:bg-gray-400" style={{ backgroundColor: "var(--color-secondary)" }}>{isPending ? "Logging in..." : "Log ind"}</button>
             </form>
-            <div className="wrapper text-center mt-4 text-sm text-gray-400">
+            <div className="wrapper text-center my-4 text-sm text-gray-400">
                 <p>Are You not yet a Believer?</p>
                 <p>
-                    <a href="/sign-up" className="underline text-yellow-500 hover:text-blue-700">Sign up here</a> to start training like a pro.
+                    <a href="/sign-up" className="underline text-yellow-500 hover:text-blue-700">Sign up here</a> to start training like a pro. <br /> <i>admin: admin / password: 1234</i>
                 </p>
             </div>
         </section >
