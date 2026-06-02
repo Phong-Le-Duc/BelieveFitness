@@ -38,7 +38,7 @@ export default function SplashScreen({ onFinish }) {
     if (!visible) return null;
 
     return (
-        <div className="absolute inset-0 w-full h-full bg-black flex flex-col items-center justify-center z-9999 overflow-hidden">
+        <div className="fixed inset-0 w-screen h-screen bg-black flex flex-col items-center justify-center z-9999 overflow-hidden">
 
             <Image
                 src={SPLASH_IMAGES[imgIdx]}

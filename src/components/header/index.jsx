@@ -20,7 +20,7 @@ export default function Header({ isLoggedIn }) {
     const isHome = pathname === "/";
     const isDetailPage = pathname.startsWith("/popular-classes/") && pathname.split("/").length === 3;
     const headerRouteLocation = isHome || isDetailPage
-        ? "sticky top-0 z-50"
+        ? "fixed top-0 left-0 right-0 z-50"
         : "relative";
 
 

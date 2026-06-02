@@ -13,7 +13,7 @@ export default function SplashLayout({ children, fontClass }) {
                 {splashDone && (
                     <>
                         <Header />
-                        <main className="app-content">{children}</main>
+                        {children}
                     </>
                 )}
             </div>
