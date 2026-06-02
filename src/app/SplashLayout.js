@@ -7,7 +7,7 @@ export default function SplashLayout({ children, fontClass }) {
     const [splashDone, setSplashDone] = useState(false);
 
     return (
-        <div className={fontClass} style={{ position: "relative", minHeight: "100vh" }}>
+        <div className={fontClass}>
             <SplashScreen onFinish={() => setSplashDone(true)} />
             {splashDone && (
                 <>
