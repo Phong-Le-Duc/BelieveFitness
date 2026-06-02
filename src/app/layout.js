@@ -29,9 +29,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <SplashLayout fontClass={fontClass}>
-          {children}
-        </SplashLayout>
+        <div className="w-md mx-auto">
+
+          <SplashLayout fontClass={fontClass}>
+            {children}
+          </SplashLayout>
+        </div>
       </body>
     </html>
   );
